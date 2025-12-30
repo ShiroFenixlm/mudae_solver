@@ -22,7 +22,7 @@ function render() {
             const cell = document.createElement("div");
             cell.className = "cell";
 
-            if (board[x][y] !== STATES.UNKNOWN){
+            if (board[y][x] !== STATES.UNKNOWN){
                 cell.classList.add(board[x][y])
             }
         }
