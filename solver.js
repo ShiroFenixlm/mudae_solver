@@ -29,3 +29,5 @@ function render() {
         
     }
 }
+
+render();
