@@ -23,7 +23,7 @@ function render() {
             cell.className = "cell";
 
             if (board[y][x] !== STATES.UNKNOWN){
-                cell.classList.add(board[x][y])
+                cell.classList.add(board[y][x])
             }
         }
         
