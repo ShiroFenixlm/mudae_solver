@@ -85,19 +85,18 @@ function renderBoard() {
 
       const cell = gameState.board[y][x];
 
-      // Color state
+
       if (cell.state !== STATES.UNKNOWN) {
         cellDiv.classList.add(cell.state);
       }
 
-      // Highlight for red candidates
       if (cell.highlight === "red-100") {
         cellDiv.classList.add("highlight-red");
       } else if (cell.highlight === "red-50") {
         cellDiv.classList.add("highlight-red-dashed");
       }
 
-      // Highlight suggestions
+
       const suggestion = gameState.suggestions.find(
         s => s.x === x && s.y === y
       );
