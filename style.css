@@ -24,6 +24,12 @@ body{
 .cell.yellow {background: yellow;}
 .cell.orange {background: orange;}
 .cell.unknown {background: lightslategray;}
+.cell.highlight-red {
+  outline: 9px solid red;
+}
+.cell.highlight-red.dashed {
+  outline: 9px dashed red;
+}
 
 .best {outline: 2px solid lawngreen;}
 .good {outline: 2px solid orange;}

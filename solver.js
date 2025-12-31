@@ -51,8 +51,25 @@ document.querySelectorAll("#palette button").forEach(btn => {
 function updateGame() {
   const stateBoard = getStateBoard(gameState.board);
 
+  // Clear previous highlights
+  for (let row of gameState.board) {
+    for (let cell of row) {
+      delete cell.highlight;
+    }
+  }
+
   gameState.possibleReds = getPossibleReds(stateBoard);
   gameState.suggestions = suggestMoves(stateBoard);
+
+  // Highlight red candidates
+  if (gameState.possibleReds.length === 1) {
+    const red = gameState.possibleReds[0];
+    gameState.board[red.y][red.x].highlight = "red-100";
+  } else if (gameState.possibleReds.length === 2) {
+    for (const red of gameState.possibleReds) {
+      gameState.board[red.y][red.x].highlight = "red-50";
+    }
+  }
 
   renderBoard();
 }
@@ -67,10 +84,20 @@ function renderBoard() {
       cellDiv.className = "cell";
 
       const cell = gameState.board[y][x];
+
+      // Color state
       if (cell.state !== STATES.UNKNOWN) {
         cellDiv.classList.add(cell.state);
       }
 
+      // Highlight for red candidates
+      if (cell.highlight === "red-100") {
+        cellDiv.classList.add("highlight-red");
+      } else if (cell.highlight === "red-50") {
+        cellDiv.classList.add("highlight-red-dashed");
+      }
+
+      // Highlight suggestions
       const suggestion = gameState.suggestions.find(
         s => s.x === x && s.y === y
       );
