@@ -122,7 +122,7 @@ function validRelativePosition(color, x, y, rx, ry) {
       return Math.abs(dx) + Math.abs(dy) === 1;
 
     case "yellow":
-      return Math.abs(dx) === 1 && Math.abs(dy) === 1;
+      return Math.abs(dx) === Math.abs(dy) && dx !== 0;
 
     case "green":
       return x === rx || y === ry;
