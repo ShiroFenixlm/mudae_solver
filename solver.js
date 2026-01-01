@@ -65,7 +65,7 @@ function updateGame() {
   if (gameState.possibleReds.length === 1) {
     const red = gameState.possibleReds[0];
     gameState.board[red.y][red.x].highlight = "red-100";
-  } else if (gameState.possibleReds.length >= 2 && gameState.possibleReds.length <= 4) {
+  } else if (gameState.possibleReds.length === 2) {
     for (const red of gameState.possibleReds) {
       gameState.board[red.y][red.x].highlight = "red-50";
     }
