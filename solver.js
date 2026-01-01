@@ -51,7 +51,7 @@ document.querySelectorAll("#palette button").forEach(btn => {
 function updateGame() {
   const stateBoard = getStateBoard(gameState.board);
 
-  // Clear previous highlights
+  // Limpiar highlights anteriores
   for (let row of gameState.board) {
     for (let cell of row) {
       delete cell.highlight;
@@ -61,18 +61,18 @@ function updateGame() {
   gameState.possibleReds = getPossibleReds(stateBoard);
   gameState.suggestions = suggestMoves(stateBoard);
 
-  // Highlight red candidates
-  if (gameState.possibleReds.length === 1) {
-    const red = gameState.possibleReds[0];
-    gameState.board[red.y][red.x].highlight = "red-100";
-  } else if (gameState.possibleReds.length === 2) {
+  // 🔴 Highlight cuando hay ENTRE 1 Y 4 posibilidades
+  const count = gameState.possibleReds.length;
+
+  if (count >= 1 && count <= 4) {
     for (const red of gameState.possibleReds) {
-      gameState.board[red.y][red.x].highlight = "red-50";
+      gameState.board[red.y][red.x].highlight = "red-candidate";
     }
   }
 
   renderBoard();
 }
+
 
 function renderBoard() {
   const boardDiv = document.getElementById("board");
@@ -90,11 +90,9 @@ function renderBoard() {
         cellDiv.classList.add(cell.state);
       }
 
-      if (cell.highlight === "red-100") {
-        cellDiv.classList.add("highlight-red");
-      } else if (cell.highlight === "red-50") {
-        cellDiv.classList.add("highlight-red-dashed");
-      }
+      if (cell.highlight === "red-candidate") {
+  cellDiv.classList.add("highlight-red");
+}
 
 
       const suggestion = gameState.suggestions.find(
